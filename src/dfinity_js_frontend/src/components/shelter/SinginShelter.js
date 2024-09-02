@@ -7,24 +7,19 @@ const SinginShelter = ({ fetchShelter }) => {
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
 
-  
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const shelter ={
+      const shelter = {
         name,
         phoneNumber,
         email,
         location,
-      }
+      };
       await createShelter(shelter).then((res) => {
-      //console.log(res);
         fetchShelter();
       });
-    } catch (error) {
-      //console.log(error);
-    }
+    } catch (error) {}
   };
   return (
     <div className=" bg-slate-200 fixed flex justify-center items-center w-full h-[100%]">
@@ -68,7 +63,6 @@ const SinginShelter = ({ fetchShelter }) => {
             />
           </div>
           <button
-            
             onClick={handleSubmit}
             className="bg-blue-700 text-white  pt-2 pb-2 pl-3 pr-3"
           >

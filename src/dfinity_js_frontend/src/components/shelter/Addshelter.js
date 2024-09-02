@@ -16,11 +16,7 @@ const shelter = ({ save }) => {
 
   return (
     <>
-      <Button
-        onClick={handleShow}
-        className=" bg-black text-white "
-       
-      >
+      <Button onClick={handleShow} className=" bg-black text-white ">
         <i className="bi bi-plus"></i>
         <span className=" fs-6"> Add Service</span>
       </Button>
@@ -41,19 +37,23 @@ const shelter = ({ save }) => {
               />
             </FloatingLabel>
             <FloatingLabel
-            controlId="inputDescription"
-            label="Description"
-            className="mb-3"
-          >
-            <Form.Control
-            type="text"
-            onChange={(e) => {
-              setDescription(e.target.value);
-            }}
-            placeholder="Enter description of service"
-          />
-          </FloatingLabel>
-            <FloatingLabel controlId="inputPrice" label="Price" className="mb-3">
+              controlId="inputDescription"
+              label="Description"
+              className="mb-3"
+            >
+              <Form.Control
+                type="text"
+                onChange={(e) => {
+                  setDescription(e.target.value);
+                }}
+                placeholder="Enter description of service"
+              />
+            </FloatingLabel>
+            <FloatingLabel
+              controlId="inputPrice"
+              label="Price"
+              className="mb-3"
+            >
               <Form.Control
                 type="text"
                 placeholder="Price"

@@ -3,23 +3,21 @@ import PropTypes from "prop-types";
 import { Button, Modal, Form, FloatingLabel } from "react-bootstrap";
 
 const Adopt = ({ adopt }) => {
-
-const[userPhoneNumber, setUserPhoneNumber] = useState("");
-const [address, setAddress] = useState("");
-const [reasonForAdoption, setReasonForAdoption] = useState("");
+  const [userPhoneNumber, setUserPhoneNumber] = useState("");
+  const [address, setAddress] = useState("");
+  const [reasonForAdoption, setReasonForAdoption] = useState("");
 
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const isFormFilled = () =>  userPhoneNumber && address && reasonForAdoption;
+  const isFormFilled = () => userPhoneNumber && address && reasonForAdoption;
 
   return (
     <>
       <Button
         onClick={handleShow}
-        
         className=" w-[80%] transition duration-150 ease-in-out bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 hover:scale-110 rounded"
       >
         Adopt
@@ -80,10 +78,12 @@ const [reasonForAdoption, setReasonForAdoption] = useState("");
               onClick={() => {
                 adopt(userPhoneNumber, address, reasonForAdoption);
                 handleClose();
-                console.log("Data sent to adopt function", {userPhoneNumber, address, reasonForAdoption});
+                console.log("Data sent to adopt function", {
+                  userPhoneNumber,
+                  address,
+                  reasonForAdoption,
+                });
               }}
-              
-              
             >
               Adopt
             </Button>

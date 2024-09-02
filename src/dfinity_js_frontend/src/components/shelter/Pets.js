@@ -9,23 +9,17 @@ import {
   getPets as getPetList,
   getShelters,
   updatePet,
-
 } from "../../utils/petAdoption";
 
-import Pet from "./Pet";
 import AddPet from "./AddPet";
 import PetInfo from "./PetInformation";
 import { Link } from "react-router-dom";
-import PetInputForm from "./PetInfo";
 
 const Pets = () => {
   const [pets, setPets] = useState([]);
   const [pet, setPet] = useState({});
   const [loading, setLoading] = useState(false);
   const [shelter, setShelter] = useState({});
-   
-
-   
 
   const fetchShelters = async () => {
     try {
@@ -37,7 +31,6 @@ const Pets = () => {
     }
   };
 
- 
   const fetchPets = async () => {
     try {
       const pets = await getPetList();
@@ -48,18 +41,17 @@ const Pets = () => {
     }
   };
 
- 
-   const getAllPets = async () => {
-     try {
-       setLoading(true);
-       setPets(await getPetList());
-     } catch (error) {
-       console.log({ error });
-     } finally {
-       setLoading(false);
-     }
-   };
- 
+  const getAllPets = async () => {
+    try {
+      setLoading(true);
+      setPets(await getPetList());
+    } catch (error) {
+      console.log({ error });
+    } finally {
+      setLoading(false);
+    }
+  };
+
   const createPet = async (pet) => {
     try {
       setLoading(true);
@@ -96,17 +88,6 @@ const Pets = () => {
       petImage,
       healthStatus,
     });
-    console.log("Data being sent:", {
-      age,
-      name,
-      description,
-      healthStatus,
-      gender,
-      shelterId: shelter.id,
-      breed,
-      //petImage,
-      species,
-    });
   };
 
   const update = async (pet) => {
@@ -124,14 +105,12 @@ const Pets = () => {
     }
   };
 
-
   useEffect(() => {
     fetchShelters();
     getAllPets();
     fetchPets();
   }, []);
 
-  
   return (
     <>
       <>
@@ -144,7 +123,6 @@ const Pets = () => {
             <h1>Adoptions</h1>
           </Link>
         </div>
-       
 
         <div className=" flex">
           <Row xs={1} sm={2} lg={3} className="">
@@ -154,7 +132,6 @@ const Pets = () => {
                 pet={{
                   ..._petInfo,
                 }}
-              
                 update={update}
               />
             ))}

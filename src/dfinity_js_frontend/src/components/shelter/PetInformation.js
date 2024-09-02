@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Card, Col } from "react-bootstrap";
 import HUSKY1 from "../../assets/img/HUSKY1.png";
- 
+
 const PetInformation = ({ pet }) => {
   const {
     id,
@@ -13,16 +13,10 @@ const PetInformation = ({ pet }) => {
     age,
     petImage,
     healthStatus,
-status,
+    status,
   } = pet;
- 
 
   const servicePrincipal = window.auth.principalText;
-
-  
-
- 
-  
 
   return (
     <div>
@@ -38,7 +32,6 @@ status,
             <p>Health Status: {healthStatus}</p>
             <p>Adoption Status: {status}</p>
           </div>
-           
         </Card.Body>
       </Card>
     </div>
@@ -47,7 +40,6 @@ status,
 
 PetInformation.propTypes = {
   pet: PropTypes.object.isRequired,
- 
 };
 
 export default PetInformation;

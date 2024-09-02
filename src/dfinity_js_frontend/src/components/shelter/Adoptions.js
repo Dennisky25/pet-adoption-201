@@ -5,12 +5,16 @@ import { Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { NotificationSuccess, NotificationError } from "../utils/Notifications";
 
-import { getAdoptionRecords as getAdoptionsList, completeAdoption, failAdoption  } from "../../utils/petAdoption";
+import {
+  getAdoptionRecords as getAdoptionsList,
+  completeAdoption,
+  failAdoption,
+} from "../../utils/petAdoption";
 import AdoptionInfo from "./Adoption";
 import Nav from "./Nav";
 
 const Adoptions = () => {
-const [adoptions, setAdoptions] = useState([]);
+  const [adoptions, setAdoptions] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const fetchAdoptions = useCallback(async () => {
@@ -22,17 +26,15 @@ const [adoptions, setAdoptions] = useState([]);
     } finally {
       setLoading(false);
     }
-  }
-  ); 
+  });
 
-  
   const complete = async (id) => {
     try {
       setLoading(true);
       await completeAdoption(id);
       fetchAdoptions();
       console.log(id);
-    toast(<NotificationSuccess text="Adoption completed successfully" />);
+      toast(<NotificationSuccess text="Adoption completed successfully" />);
     } catch (error) {
       console.log({ error });
       toast(<NotificationError text="Failed to complete adoption" />);
@@ -41,7 +43,6 @@ const [adoptions, setAdoptions] = useState([]);
     }
   };
 
- 
   const fail = async (id) => {
     try {
       setLoading(true);
@@ -55,14 +56,10 @@ const [adoptions, setAdoptions] = useState([]);
       setLoading(false);
     }
   };
- 
+
   useEffect(() => {
-   fetchAdoptions();
-
-  }, [
-  
-
-  ]);
+    fetchAdoptions();
+  }, []);
 
   return (
     <>

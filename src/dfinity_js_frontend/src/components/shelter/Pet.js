@@ -10,8 +10,6 @@ const Pet = ({ pet }) => {
 
   const servicePrincipal = window.auth.principalText;
 
-  
-
   return (
     <div
       className=" relative w-[350px] text-center justify-center  pointer transition hover:border-2  hover:border-blue-500 group/item "

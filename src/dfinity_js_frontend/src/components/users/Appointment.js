@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Card, Col  } from "react-bootstrap";
+import { Card, Col } from "react-bootstrap";
 import UpdateAppointment from "../shelter/Update";
 
 const Appointment = ({ appointmentInfo, update }) => {
-  const { appointmentId, serviceId, serviceName, professionalName, time } = appointmentInfo;
+  const { appointmentId, serviceId, serviceName, professionalName, time } =
+    appointmentInfo;
 
   const triggerUpdate = (serviceName, time) => {
     update({

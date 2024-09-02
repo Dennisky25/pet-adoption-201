@@ -16,7 +16,6 @@ import {
   nat64,
   Result,
   Canister,
-  
 } from "azle";
 
 import { v4 as uuidv4 } from "uuid";
@@ -37,8 +36,6 @@ const UserPayload = Record({
   email: text,
   address: text,
 });
-
-
 
 const Pet = Record({
   id: text,
@@ -70,7 +67,6 @@ const PetImage = Record({
   petId: text,
   petImage: text,
 });
-
 
 const updatePetPayload = Record({
   petId: text,
@@ -140,8 +136,6 @@ const updateAdoption = Record({
   reasonForAdoption: text,
 });
 
- 
-
 const Error = Variant({
   NotFound: text,
   InvalidPayload: text,
@@ -153,7 +147,6 @@ const SheltersStorage = StableBTreeMap(2, text, Shelter);
 const AdoptionsStorage = StableBTreeMap(3, text, AdoptionRecords);
 
 export default Canister({
-   
   addUser: update([UserPayload], Result(User, Error), (payload) => {
     if (typeof payload !== "object" || Object.keys(payload).length === 0) {
       return Err({ NotFound: "invalid payoad" });
@@ -169,17 +162,14 @@ export default Canister({
     return Ok(user);
   }),
 
- 
   getUsers: query([], Vec(User), () => {
     return UsersStorage.values();
   }),
 
-  
   getUser: query([text], Opt(User), (id) => {
     return UsersStorage.get(id);
   }),
 
-   
   getUserOwner: query([], Result(User, Error), () => {
     const userOpt = UsersStorage.values().filter((user) => {
       return user.principal.toText() === ic.caller().toText();
@@ -192,7 +182,6 @@ export default Canister({
     return Ok(userOpt[0]);
   }),
 
-  
   addPet: update([PetPayload], Result(Pet, Error), (payload) => {
     if (typeof payload !== "object" || Object.keys(payload).length === 0) {
       return Err({ NotFound: "invalid payoad" });
@@ -207,7 +196,6 @@ export default Canister({
     return Ok(pet);
   }),
 
- 
   addPetImage: update([PetImage], Result(PetImage, Error), (payload) => {
     if (typeof payload !== "object" || Object.keys(payload).length === 0) {
       return Err({ NotFound: "invalid payoad" });
@@ -216,23 +204,18 @@ export default Canister({
     return Ok(payload);
   }),
 
-
-
-  
   getPet: query([text], Opt(Pet), (id) => {
     return PetsStorage.get(id);
   }),
 
-   
   getPets: query([], Vec(Pet), () => {
     return PetsStorage.values();
   }),
- 
+
   getPetsNotAdopted: query([], Vec(Pet), () => {
     return PetsStorage.values().filter((pet) => pet.status === "notAdopted");
   }),
 
-  
   updatePetInfo: update([updatePetPayload], Result(Pet, Error), (payload) => {
     const petOpt = PetsStorage.get(payload.petId);
     if (petOpt === null) {
@@ -247,7 +230,6 @@ export default Canister({
     return Ok(updatedPet);
   }),
 
-  
   createShelter: update([ShelterPayload], Result(Shelter, Error), (payload) => {
     if (typeof payload !== "object" || Object.keys(payload).length === 0) {
       return Err({ NotFound: "invalid payoad" });
@@ -263,17 +245,14 @@ export default Canister({
     return Ok(shelter);
   }),
 
-  
   getShelter: query([text], Opt(Shelter), (id) => {
     return SheltersStorage.get(id);
   }),
 
-   
   getShelters: query([], Vec(Shelter), () => {
     return SheltersStorage.values();
   }),
 
-   
   getShelterOwner: query([], Result(Shelter, Error), () => {
     const shelterOpt = SheltersStorage.values().filter((shelter) => {
       return shelter.principal.toText() === ic.caller().toText();
@@ -286,7 +265,6 @@ export default Canister({
     return Ok(shelterOpt[0]);
   }),
 
-   
   updateShelterInfo: update(
     [updateShelterPayload],
     Result(Shelter, Error),
@@ -305,7 +283,6 @@ export default Canister({
     }
   ),
 
-   
   searchPetsBySpecies: query([text], Vec(Pet), (species) => {
     return PetsStorage.values().filter((pet) => {
       return pet.species.toLowerCase() === species.toLocaleLowerCase();
@@ -355,7 +332,6 @@ export default Canister({
         status: "peding",
       };
 
-       
       user.application.push(records.adoptionId);
       AdoptionsStorage.insert(records.adoptionId, records);
 
@@ -363,17 +339,14 @@ export default Canister({
     }
   ),
 
-  
   getAdoptionRecords: query([], Vec(AdoptionRecords), () => {
     return AdoptionsStorage.values();
   }),
 
-   
   getAdoptionRecord: query([text], Opt(AdoptionRecords), (id) => {
     return AdoptionsStorage.get(id);
   }),
 
-   
   updateAdoptionRecord: update(
     [updateAdoption],
     Result(AdoptionRecords, Error),
@@ -392,7 +365,6 @@ export default Canister({
     }
   ),
 
-   
   completeAdoption: update(
     [text],
     Result(AdoptionRecords, Error),
@@ -406,7 +378,7 @@ export default Canister({
         ...adoption,
         status: "completed",
       };
-   
+
       const petOpt = PetsStorage.get(adoption.petId);
       if (petOpt === null) {
         return Err({ NotFound: "Pet not found" });
@@ -424,7 +396,6 @@ export default Canister({
     }
   ),
 
-   
   failAdoption: update([text], Result(AdoptionRecords, Error), (adoptionId) => {
     const adoptionOpt = AdoptionsStorage.get(adoptionId);
     if (adoptionOpt === null) {
@@ -436,13 +407,9 @@ export default Canister({
       status: "failed",
     };
 
-   
-    
     AdoptionsStorage.insert(adoptionId, updatedAdoption);
     return Ok(updatedAdoption);
   }),
-
-  
 });
 globalThis.crypto = {
   // @ts-ignore

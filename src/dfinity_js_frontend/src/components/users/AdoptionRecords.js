@@ -2,8 +2,6 @@ import React, { useCallback, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { Card } from "react-bootstrap";
 
-import { NotificationError, NotificationSuccess } from "../utils/Notifications";
-
 import UpdateApplication from "./UpdateAdoptionApplication";
 
 const AdoptionApplication = ({ adoption, update }) => {

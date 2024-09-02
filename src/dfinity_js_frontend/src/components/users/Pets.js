@@ -1,24 +1,16 @@
 import React, { useEffect, useState, useCallback } from "react";
-import { toast } from "react-toastify";
-import Loader from "../utils/Loader";
-import { Row } from "react-bootstrap";
 
-import { NotificationSuccess, NotificationError } from "../utils/Notifications";
 import {
- 
   getPets as getPetList,
- 
- getPetsNotAdopted
+  getPetsNotAdopted,
 } from "../../utils/petAdoption";
-
- 
 
 const Pets = () => {
   const [pets, setPets] = useState([]);
   const [pet, setPet] = useState({});
   const [loading, setLoading] = useState(false);
 
-   const { id, name } = pet;
+  const { id, name } = pet;
   const navigate = useNavigate();
 
   const servicePrincipal = window.auth.principalText;
@@ -33,7 +25,6 @@ const Pets = () => {
     }
   };
 
-//get pets not adopted
   const getPetsNotAdopted = useCallback(async () => {
     try {
       setLoading(true);
@@ -48,10 +39,9 @@ const Pets = () => {
   useEffect(() => {
     fetchPets();
     getPetsNotAdopted();
-  }
-    , []);
+  }, []);
 
-   return (
+  return (
     <div
       className=" relative w-[350px] h-[200px] text-center justify-center  pointer transition hover:border-2  hover:border-blue-500 group/item "
       onClick={() => {
@@ -68,5 +58,3 @@ const Pets = () => {
     </div>
   );
 };
-
-
